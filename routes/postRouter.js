@@ -13,7 +13,8 @@ router.post("/posts", (req, res) => {
         newPost.save();
         res.sendStatus(200);
     } catch (error) {
-        console.log(error.message);
+        res.sendStatus(400);
+        // console.log(error.message);
     }
 });
 router.put("/posts/:id", async (req, res) => {
@@ -26,7 +27,11 @@ router.put("/posts/:id", async (req, res) => {
     }
 });
 router.delete("/posts/:id", async (req, res) => {
-    await postModel.findByIdAndDelete(req.params.id);
-    res.sendStatus(200);
+    try {
+        await postModel.findByIdAndDelete(req.params.id);
+        res.sendStatus(200);
+    } catch (error) {
+        res.sendStatus(400);
+    }
 });
 module.exports = router;
