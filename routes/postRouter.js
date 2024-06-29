@@ -16,7 +16,17 @@ router.post("/posts", (req, res) => {
         console.log(error.message);
     }
 });
+router.put("/posts/:id", async (req, res) => {
+    try {
+        const updatedUser = req.body;
+        await postModel.findByIdAndUpdate(req.params.id, updatedUser);
+        res.sendStatus(200);
+    } catch (error) {
+        res.sendStatus(400);
+    }
+});
 router.delete("/posts/:id", async (req, res) => {
     await postModel.findByIdAndDelete(req.params.id);
+    res.sendStatus(200);
 });
 module.exports = router;
