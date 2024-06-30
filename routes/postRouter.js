@@ -1,10 +1,19 @@
 const express = require("express");
 const postModel = require("../models/postSchema");
+const userModel = require("../models/userSchema");
 const router = express.Router();
 
 router.get("/posts", async (req, res) => {
     const allPosts = await postModel.find();
     res.json(allPosts);
+});
+router.get("/posts/:id", async (req, res) => {
+    try {
+        const blog = await postModel.findById(req.params.id);
+        res.send(blog);
+    } catch (error) {
+        res.sendStatus(400);
+    }
 });
 router.post("/posts", (req, res) => {
     const post = req.body;
