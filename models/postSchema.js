@@ -7,7 +7,10 @@ const postSchema = mongoose.Schema({
     date: String,
     topic: String,
     image_url: String,
-    heading: String,
+    heading: {
+        type: String,
+        required: true,
+    },
     description: String,
 });
 module.exports = mongoose.model("posts", postSchema);
