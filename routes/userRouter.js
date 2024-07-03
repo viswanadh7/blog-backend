@@ -29,7 +29,12 @@ router.post("/login", async (req, res) => {
 });
 router.get("/users/:id", async (req, res) => {
     const userById = await userModel.findById(req.params.id);
-    res.json(userById);
+    const sendingUser = {
+        id: userById._id,
+        firstname: userById.firstname,
+        profile_url: userById.profile_url,
+    };
+    res.json(sendingUser);
 });
 router.post("/users", async (req, res) => {
     const user = req.body;
