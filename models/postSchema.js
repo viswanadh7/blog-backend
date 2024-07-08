@@ -11,6 +11,7 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    keywords: Array,
     description: String,
 });
 module.exports = mongoose.model("posts", postSchema);
